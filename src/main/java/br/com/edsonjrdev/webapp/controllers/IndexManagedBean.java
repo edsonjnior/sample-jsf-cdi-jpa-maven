@@ -11,7 +11,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
-import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -23,7 +23,7 @@ public class IndexManagedBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @EJB
+    @Inject
     private ProductFacade productFacade;
 
     /**
