@@ -11,6 +11,9 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 
 /**
@@ -18,22 +21,47 @@ import javax.inject.Inject;
  * @author junior
  */
 @Named(value = "indexMB")
-@SessionScoped
+@ViewScoped
 public class IndexManagedBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Inject
+    @EJB
     private ProductFacade productFacade;
-
+    private Product product;
+    private List<Product> products;
+    
     /**
      * Creates a new instance of IndexManagedBean
      */
     public IndexManagedBean() {
     }
     
-    
-    public List<Product> allProducts(){
-        return this.productFacade.findAll();
+    @PostConstruct
+    void init(){
+        product = new Product();
+        products = productFacade.findAll();
     }
+    
+    public String saveProduct(){
+        productFacade.create(product);
+        return "index.xhtml?faces-redirect=true";
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+    
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+    
 }
