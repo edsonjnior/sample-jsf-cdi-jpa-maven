@@ -8,24 +8,48 @@
         <h:outputStylesheet name="bootstrap-4.1.1/css/bootstrap.min.css" library="static" ></h:outputStylesheet>
     </h:head>
     <h:body>
-        <h:dataTable var="table" value="#{indexMB.allProducts()}" styleClass="table">
-            <h:column>
-                <f:facet name="header">Id</f:facet>
-                <h:outputText value="#{table.id}" />
-            </h:column>
-            <h:column>
-                <f:facet name="header">Product</f:facet>
-                <h:outputText value="#{table.name}" />
-            </h:column>
-            <h:column>
-                <f:facet name="header">Description</f:facet>
-                <h:outputText value="#{table.description}" />
-            </h:column>
-            <h:column>
-                <f:facet name="header">Price $</f:facet>
-                <h:outputText value="#{table.price}" />
-            </h:column>
-        </h:dataTable>
+        <div class="container">
+            <h:form>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <h:outputLabel for="name" value="Name" />
+                        <h:inputText id="name" value="#{indexMB.product.name}" styleClass="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-2">
+                    <h:commandButton action="#{indexMB.saveProduct()}" styleClass="btn btn-primary" value="Add" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h:dataTable var="table" value="#{indexMB.products}" styleClass="table">
+                            <h:column>
+                                <f:facet name="header">Id</f:facet>
+                                <h:outputText value="#{table.id}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Product</f:facet>
+                                <h:outputText value="#{table.name}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Description</f:facet>
+                                <h:outputText value="#{table.description}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Price $</f:facet>
+                                <h:outputText value="#{table.price}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Quantity</f:facet>
+                                <h:outputText value="#{table.quantity}" />
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </div>
+            </h:form>
+        </div>
     </h:body>
 
     <h:outputScript name="jquery/jquery-3.3.1.slim.min.js" library="static"></h:outputScript>
